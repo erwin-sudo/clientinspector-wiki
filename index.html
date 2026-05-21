@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClientInspector - Documentation</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #e0e0e0; background: #1a1a2e; max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+h1 { color: #00bcd4; border-bottom: 2px solid #00bcd4; padding-bottom: 12px; font-size: 2.2em; }
+h2 { color: #00bcd4; margin-top: 40px; font-size: 1.6em; }
+h3 { color: #e0e0e0; margin-top: 28px; font-size: 1.2em; }
+p, li { color: #b0b0b0; }
+strong { color: #e0e0e0; }
+code { background: #2a2a4a; padding: 2px 6px; border-radius: 4px; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.9em; color: #80cbc4; }
+pre { background: #2a2a4a; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid #333366; }
+pre code { background: none; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #333366; }
+th { background: #2a2a4a; color: #00bcd4; font-weight: 600; }
+td { color: #b0b0b0; }
+tr:hover td { background: #252545; }
+hr { border: none; border-top: 1px solid #333366; margin: 32px 0; }
+ul, ol { padding-left: 24px; }
+li { margin: 6px 0; }
+a { color: #4dd0e1; }
+</style>
+</head>
+<body>
+
+<h1>ClientInspector</h1>
+
+<p><strong>ClientInspector</strong> is a premium Paper 1.21.4 plugin that gives your staff team complete visibility into every player who joins your server. When a player connects, staff with the appropriate permission receive a rich, interactive notification containing the player's client, version, ping, game mode, health, equipment, effects, flight status, playtime, and much more.</p>
+
+<p>Beyond the join notification, ClientInspector provides 9 powerful subcommands for on-demand player inspection: detailed player lookup, inventory viewing, equipment inspection with enchantments and durability, active potion effects, statistics, and precise location data.</p>
+
+<hr>
+
+<h2>Features</h2>
+
+<h3>Join Notifications</h3>
+<ul>
+<li>Rich in-game notification sent to all staff on player join</li>
+<li>Player name is clickable (copies UUID) and hoverable (full tooltip with 45+ fields)</li>
+<li>Configurable notification sound (customizable name, volume, pitch)</li>
+<li>30+ individual display toggles so you see only what matters</li>
+<li>World blacklist support (suppress notifications in specified worlds)</li>
+<li>Custom join/quit chat messages for all players</li>
+</ul>
+
+<h3>In-Game Data Collected</h3>
+<ul>
+<li><strong>Player identity:</strong> name, UUID, display name, list name, OP status, first/last played dates, bed location, last death location, playtime</li>
+<li><strong>Client:</strong> brand (Vanilla, Forge, Fabric, Lunar Client, Badlion, Feather, OptiFine, NeoForge, Geyser, LabyMod, CheatBreaker, etc.), version, protocol number, locale</li>
+<li><strong>Connection:</strong> ping, IP address (with port), world, chunk coordinates</li>
+<li><strong>Game state:</strong> game mode, health, max health, food, saturation, exhaustion, absorption, experience level/total/progress</li>
+<li><strong>Movement:</strong> flying, allow flight, walk speed, fly speed, sneaking, sprinting, swimming, gliding</li>
+<li><strong>Effects:</strong> all active potion effects with amplifier (Roman numerals) and duration</li>
+<li><strong>Equipment:</strong> all 6 armor and item slots with names, amounts, durability, and enchantments</li>
+<li><strong>Client settings:</strong> view distance, chat mode, chat colors, main hand</li>
+</ul>
+
+<h3>Plugin Integrations</h3>
+<ul>
+<li><strong>ViaVersion:</strong> protocol version and mapped Minecraft version</li>
+<li><strong>Floodgate/Geyser:</strong> Bedrock player detection</li>
+<li><strong>SuperVanish / PremiumVanish:</strong> vanished status</li>
+<li><strong>EssentialsX:</strong> AFK, god mode, mute status, nickname</li>
+</ul>
+
+<h3>Commands</h3>
+<ul>
+<li><code>/ci lookup &lt;player&gt;</code> Full player detail view (50+ fields)</li>
+<li><code>/ci invsee &lt;player&gt;</code> Open and edit a player's inventory</li>
+<li><code>/ci ecsee &lt;player&gt;</code> Open and edit a player's ender chest</li>
+<li><code>/ci equip &lt;player&gt;</code> Equipment with durability and enchantments</li>
+<li><code>/ci effects &lt;player&gt;</code> Active potion effects with amplifiers and timers</li>
+<li><code>/ci stats &lt;player&gt;</code> Playtime, kills, deaths, K/D, blocks mined, distance walked, jumps, items crafted/enchanted, and more</li>
+<li><code>/ci location &lt;player&gt;</code> World, environment, coordinates, yaw/pitch, chunk, biome, light levels, in-game time, weather</li>
+<li><code>/ci reload</code> Reload configuration</li>
+<li><code>/ci toggle</code> Toggle your own notifications on/off</li>
+</ul>
+
+<h3>Discord Webhook</h3>
+<ul>
+<li>Rich embed sent to Discord on player join</li>
+<li>Configurable embed color, IP visibility toggle</li>
+<li>Includes player, UUID, version, client, ping, platform, game mode, world, locale, HP, level, OP status, vanish, AFK, god mode, nickname, playtime, effects, flight, equipment</li>
+</ul>
+
+<h3>File Logging</h3>
+<ul>
+<li>Append a customizable line to a log file per join</li>
+<li>40+ placeholders for any data field</li>
+<li>Useful for audit trails or external tool integration</li>
+</ul>
+
+<hr>
+
+<h2>Commands</h2>
+
+<p>All commands use the <code>/clientinspector</code> alias <code>/ci</code>.</p>
+
+<table>
+<thead>
+<tr><th>Command</th><th>Permission</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/ci lookup &lt;player&gt;</code></td><td><code>clientinspector.lookup</code></td><td>Full player detail view</td></tr>
+<tr><td><code>/ci invsee &lt;player&gt;</code></td><td><code>clientinspector.invsee</code></td><td>View and edit a player's inventory</td></tr>
+<tr><td><code>/ci ecsee &lt;player&gt;</code></td><td><code>clientinspector.ecsee</code></td><td>View and edit a player's ender chest</td></tr>
+<tr><td><code>/ci equip &lt;player&gt;</code></td><td><code>clientinspector.equip</code></td><td>Equipment with durability and enchantments</td></tr>
+<tr><td><code>/ci effects &lt;player&gt;</code></td><td><code>clientinspector.effects</code></td><td>Active potion effects</td></tr>
+<tr><td><code>/ci stats &lt;player&gt;</code></td><td><code>clientinspector.stats</code></td><td>Player statistics</td></tr>
+<tr><td><code>/ci location &lt;player&gt;</code></td><td><code>clientinspector.location</code></td><td>Location and environment</td></tr>
+<tr><td><code>/ci reload</code></td><td><code>clientinspector.reload</code></td><td>Reload configuration</td></tr>
+<tr><td><code>/ci toggle</code></td><td><code>clientinspector.toggle</code></td><td>Toggle your join notifications</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Permissions</h2>
+
+<table>
+<thead>
+<tr><th>Permission</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>clientinspector.notify</code></td><td>OP</td><td>Receive join notifications</td></tr>
+<tr><td><code>clientinspector.reload</code></td><td>OP</td><td>Reload the plugin configuration</td></tr>
+<tr><td><code>clientinspector.toggle</code></td><td>Everyone</td><td>Toggle your own notifications on/off</td></tr>
+<tr><td><code>clientinspector.lookup</code></td><td>OP</td><td>Look up info about an online player</td></tr>
+<tr><td><code>clientinspector.invsee</code></td><td>OP</td><td>View and edit a player's inventory</td></tr>
+<tr><td><code>clientinspector.ecsee</code></td><td>OP</td><td>View and edit a player's ender chest</td></tr>
+<tr><td><code>clientinspector.equip</code></td><td>OP</td><td>View a player's equipment</td></tr>
+<tr><td><code>clientinspector.effects</code></td><td>OP</td><td>View a player's active effects</td></tr>
+<tr><td><code>clientinspector.stats</code></td><td>OP</td><td>View a player's statistics</td></tr>
+<tr><td><code>clientinspector.location</code></td><td>OP</td><td>View a player's location</td></tr>
+<tr><td><code>clientinspector.admin</code></td><td>OP</td><td>Grants all permissions above</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Configuration</h2>
+
+<p>Full <code>config.yml</code> reference:</p>
+
+<h3>Display Toggles</h3>
+
+<table>
+<thead>
+<tr><th>Option</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>show-ip</code></td><td>false</td><td>Show player IP address</td></tr>
+<tr><td><code>show-world</code></td><td>true</td><td>Show world name</td></tr>
+<tr><td><code>show-locale</code></td><td>true</td><td>Show client locale</td></tr>
+<tr><td><code>show-brand</code></td><td>true</td><td>Show client brand</td></tr>
+<tr><td><code>show-ping</code></td><td>true</td><td>Show ping in milliseconds</td></tr>
+<tr><td><code>show-bedrock</code></td><td>true</td><td>Show Bedrock platform indicator</td></tr>
+<tr><td><code>show-address</code></td><td>false</td><td>Show IP:port</td></tr>
+<tr><td><code>show-gamemode</code></td><td>true</td><td>Show game mode</td></tr>
+<tr><td><code>show-health</code></td><td>true</td><td>Show health</td></tr>
+<tr><td><code>show-food</code></td><td>false</td><td>Show food level and saturation</td></tr>
+<tr><td><code>show-exp</code></td><td>true</td><td>Show experience level and XP</td></tr>
+<tr><td><code>show-flight</code></td><td>true</td><td>Show flight status</td></tr>
+<tr><td><code>show-movement</code></td><td>false</td><td>Show sneaking/sprinting/swimming/gliding</td></tr>
+<tr><td><code>show-effects</code></td><td>true</td><td>Show active potion effects</td></tr>
+<tr><td><code>show-equipment</code></td><td>true</td><td>Show equipped items</td></tr>
+<tr><td><code>show-playtime</code></td><td>true</td><td>Show total playtime</td></tr>
+<tr><td><code>show-first-played</code></td><td>true</td><td>Show first join date</td></tr>
+<tr><td><code>show-last-played</code></td><td>false</td><td>Show last join date</td></tr>
+<tr><td><code>show-bed-location</code></td><td>false</td><td>Show bed spawn location</td></tr>
+<tr><td><code>show-op</code></td><td>true</td><td>Show OP status</td></tr>
+<tr><td><code>show-main-hand</code></td><td>false</td><td>Show main hand (left/right)</td></tr>
+<tr><td><code>show-client-settings</code></td><td>false</td><td>Show view distance, chat mode, colors</td></tr>
+<tr><td><code>show-vanished</code></td><td>true</td><td>Show vanished status</td></tr>
+<tr><td><code>show-afk</code></td><td>true</td><td>Show AFK status</td></tr>
+<tr><td><code>show-godmode</code></td><td>true</td><td>Show god mode status</td></tr>
+<tr><td><code>show-muted</code></td><td>false</td><td>Show mute status</td></tr>
+<tr><td><code>show-nickname</code></td><td>true</td><td>Show Essentials nickname</td></tr>
+<tr><td><code>show-chunk</code></td><td>false</td><td>Show chunk coordinates</td></tr>
+<tr><td><code>show-last-death</code></td><td>false</td><td>Show last death location</td></tr>
+<tr><td><code>show-absorption</code></td><td>false</td><td>Show absorption hearts</td></tr>
+<tr><td><code>show-exhaustion</code></td><td>false</td><td>Show exhaustion level</td></tr>
+</tbody>
+</table>
+
+<h3>Notification Sound</h3>
+<pre><code>notification-sound: 'BLOCK_NOTE_BLOCK_PLING'
+notification-sound-volume: 0.5
+notification-sound-pitch: 1.0</code></pre>
+<p>Set <code>notification-sound</code> to empty (<code>''</code>) to disable.</p>
+
+<h3>World Blacklist</h3>
+<pre><code>world-blacklist: []</code></pre>
+
+<h3>Join/Quit Messages</h3>
+<pre><code>join-message:
+  enabled: false
+  message: "&amp;8[&amp;a+&amp;8] &amp;7&lt;player_name&gt;"
+
+quit-message:
+  enabled: false
+  message: "&amp;8[&amp;c-&amp;8] &amp;7&lt;player_name&gt;"</code></pre>
+
+<h3>Discord Webhook</h3>
+<pre><code>webhook:
+  enabled: false
+  url: ''
+  embed-color: '#00BCD4'
+  show-ip: false</code></pre>
+<ol>
+<li>Create a webhook in your Discord server channel settings</li>
+<li>Copy the webhook URL</li>
+<li>Set <code>enabled: true</code> and paste the URL</li>
+<li>Run <code>/ci reload</code></li>
+</ol>
+
+<h3>File Logging</h3>
+<pre><code>logging:
+  enabled: false
+  file: 'joins.log'
+  format: '[{time}] {player} ({uuid}) joined | v{version} | {brand} | {platform} | {ping}ms | {world} | {locale}'</code></pre>
+
+<table>
+<thead>
+<tr><th>Placeholder</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>{time}</code></td><td>Timestamp (yyyy-MM-dd HH:mm:ss)</td></tr>
+<tr><td><code>{player}</code></td><td>Player name</td></tr>
+<tr><td><code>{uuid}</code></td><td>Player UUID</td></tr>
+<tr><td><code>{ip}</code></td><td>IP address</td></tr>
+<tr><td><code>{address}</code></td><td>IP:port</td></tr>
+<tr><td><code>{version}</code></td><td>Minecraft version</td></tr>
+<tr><td><code>{protocol}</code></td><td>ViaVersion protocol number</td></tr>
+<tr><td><code>{brand}</code></td><td>Client brand</td></tr>
+<tr><td><code>{ping}</code></td><td>Ping in ms</td></tr>
+<tr><td><code>{platform}</code></td><td>Java or Bedrock</td></tr>
+<tr><td><code>{world}</code></td><td>World name</td></tr>
+<tr><td><code>{chunk}</code></td><td>Chunk X,Z</td></tr>
+<tr><td><code>{locale}</code></td><td>Client locale</td></tr>
+<tr><td><code>{gamemode}</code></td><td>Game mode</td></tr>
+<tr><td><code>{health}</code></td><td>Health</td></tr>
+<tr><td><code>{maxhealth}</code></td><td>Max health</td></tr>
+<tr><td><code>{food}</code></td><td>Food level</td></tr>
+<tr><td><code>{saturation}</code></td><td>Saturation</td></tr>
+<tr><td><code>{exhaustion}</code></td><td>Exhaustion</td></tr>
+<tr><td><code>{absorption}</code></td><td>Absorption</td></tr>
+<tr><td><code>{level}</code></td><td>Experience level</td></tr>
+<tr><td><code>{xp}</code></td><td>Total experience</td></tr>
+<tr><td><code>{flying}</code></td><td>Is flying</td></tr>
+<tr><td><code>{allowflight}</code></td><td>Allow flight</td></tr>
+<tr><td><code>{walkspeed}</code></td><td>Walk speed</td></tr>
+<tr><td><code>{flyspeed}</code></td><td>Fly speed</td></tr>
+<tr><td><code>{sneaking}</code></td><td>Is sneaking</td></tr>
+<tr><td><code>{sprinting}</code></td><td>Is sprinting</td></tr>
+<tr><td><code>{swimming}</code></td><td>Is swimming</td></tr>
+<tr><td><code>{gliding}</code></td><td>Is gliding</td></tr>
+<tr><td><code>{effects}</code></td><td>Active effects</td></tr>
+<tr><td><code>{helmet}</code></td><td>Helmet item</td></tr>
+<tr><td><code>{chestplate}</code></td><td>Chestplate item</td></tr>
+<tr><td><code>{leggings}</code></td><td>Leggings item</td></tr>
+<tr><td><code>{boots}</code></td><td>Boots item</td></tr>
+<tr><td><code>{mainhand}</code></td><td>Main hand item</td></tr>
+<tr><td><code>{offhand}</code></td><td>Off hand item</td></tr>
+<tr><td><code>{op}</code></td><td>Is OP</td></tr>
+<tr><td><code>{vanished}</code></td><td>Is vanished</td></tr>
+<tr><td><code>{afk}</code></td><td>Is AFK</td></tr>
+<tr><td><code>{godmode}</code></td><td>Is in god mode</td></tr>
+<tr><td><code>{muted}</code></td><td>Is muted</td></tr>
+<tr><td><code>{nickname}</code></td><td>Nickname</td></tr>
+<tr><td><code>{playtime}</code></td><td>Total playtime</td></tr>
+<tr><td><code>{firstplayed}</code></td><td>First join date</td></tr>
+<tr><td><code>{lastplayed}</code></td><td>Last join date</td></tr>
+<tr><td><code>{bedlocation}</code></td><td>Bed spawn location</td></tr>
+<tr><td><code>{lastdeath}</code></td><td>Last death location</td></tr>
+<tr><td><code>{viewdistance}</code></td><td>Client view distance</td></tr>
+<tr><td><code>{chatmode}</code></td><td>Chat mode</td></tr>
+<tr><td><code>{chatcolors}</code></td><td>Chat colors enabled</td></tr>
+<tr><td><code>{mainhandslot}</code></td><td>Main hand (left/right)</td></tr>
+<tr><td><code>{hasplayed}</code></td><td>Has played before</td></tr>
+</tbody>
+</table>
+
+<h3>Messages</h3>
+<p>All messages support <code>&amp;</code> color codes and can be customized in <code>config.yml</code> under the <code>messages:</code> section.</p>
+
+<hr>
+
+<h2>Plugin Integrations</h2>
+
+<table>
+<thead>
+<tr><th>Plugin</th><th>Integration</th><th>Optional</th></tr>
+</thead>
+<tbody>
+<tr><td>ViaVersion</td><td>Detects player protocol version and maps to Minecraft version name</td><td>Yes</td></tr>
+<tr><td>Floodgate</td><td>Detects Bedrock Edition players connecting through Geyser</td><td>Yes</td></tr>
+<tr><td>SuperVanish</td><td>Detects vanished players</td><td>Yes</td></tr>
+<tr><td>PremiumVanish</td><td>Detects vanished players</td><td>Yes</td></tr>
+<tr><td>EssentialsX</td><td>Detects AFK, god mode, mute status, and nickname</td><td>Yes</td></tr>
+</tbody>
+</table>
+
+<p>All integrations are optional. If a plugin is not installed, the corresponding features gracefully fall back to defaults without errors.</p>
+
+<hr>
+
+<h2>Installation</h2>
+
+<ol>
+<li>Download the ClientInspector jar</li>
+<li>Place it in your server's <code>plugins/</code> folder</li>
+<li>Restart your server (or use <code>/reload</code> - though restart is recommended)</li>
+<li>Grant permissions to your staff as needed</li>
+<li>Optionally configure <code>plugins/ClientInspector/config.yml</code></li>
+<li>Run <code>/ci reload</code> to apply configuration changes</li>
+</ol>
+
+<hr>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>Paper 1.21.4 (or compatible fork)</li>
+<li>Java 21+</li>
+</ul>
+
+<hr>
+
+<h2>Support</h2>
+
+<p>For issues, feature requests, or questions, please use the discussion section on SpigotMC.</p>
+
+</body>
+</html>
